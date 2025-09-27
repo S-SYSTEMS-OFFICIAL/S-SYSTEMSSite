@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-SYSTEMS – Заработок в интернете</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Общие стили ===== */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Шапка ===== */
+    header {
+      background: #111;
+      padding: 25px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      height: 70px;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ff4d4d;
+      transform: scale(1.1);
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    }
+
+    .hero p {
+      margin: 20px auto;
+      max-width: 600px;
+      font-size: 1.2rem;
+    }
+
+    .buttons .btn {
+      display: inline-block;
+      background: #ff4d4d;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 12px rgba(255,77,77,0.4);
+    }
+
+    .buttons .btn:hover {
+      background: #e63939;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 16px rgba(255,77,77,0.6);
+    }
+
+    /* Видео в Hero */
+    .hero-video {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-video video {
+      max-width: 800px;
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease;
+    }
+
+    .hero-video.visible video {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ===== Карточки ===== */
+    .advantages .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: #222;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* ===== Шаги ===== */
+    .steps .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .step {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px) rotateX(20deg);
+      transition: all 1s ease;
+    }
+
+    .step.visible {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    /* ===== Доказательства ===== */
+    .screenshots {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .screenshots img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(40px) scale(0.9);
+      transition: all 1s ease;
+    }
+
+    .screenshots img.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ===== Футер ===== */
+    .footer {
+      background: #111;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-text {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <img src="images/avatar.jpg" alt="S-SYSTEMS" class="logo">
+      <nav>
+        <ul>
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#steps">Как мы работаем</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <h1 class="section-title">S-SYSTEMS</h1>
+      <p>Помогаем новичкам зарабатывать в интернете через арбитраж трафика. Даём знания, аккаунты и поддержку.</p>
+      <div class="buttons">
+        <a href="https://t.me/s_systemsbot" class="btn">Перейти в Telegram-бота</a>
+      </div>
+      <div class="hero-video">
+        <video controls>
+          <source src="videos/promo.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="advantages" id="about">
+    <div class="container">
+      <h2 class="section-title">Почему выбирают нас?</h2>
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Обучение</h3>
+          <p>Пошаговое наставничество для новичков.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛠️</div>
+          <h3>Ресурсы</h3>
+          <p>Доступ к аккаунтам, связкам и сервисам.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>Поддержка</h3>
+          <p>Чаты, созвоны и обратная связь.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💸</div>
+          <h3>Доля прибыли</h3>
+          <p>Вы зарабатываете 55%, мы берём лишь 45%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="steps">
+    <div class="container">
+      <h2 class="section-title">Как мы работаем</h2>
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-icon">📝</div>
+          <h3>1. Заявка</h3>
+          <p>Заполняете форму на сайте и переходите в бота.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">📞</div>
+          <h3>2. Созвон</h3>
+          <p>Общение и проверка вашей мотивации.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">🛡️</div>
+          <h3>3. Доступ</h3>
+          <p>Выдаём аккаунты и материалы.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">🚀</div>
+          <h3>4. Результат</h3>
+          <p>Вы начинаете зарабатывать при нашей поддержке.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="container">
+      <h2 class="section-title">Реальные выплаты</h2>
+      <div class="screenshots">
+        <img src="images/pay1.png" alt="Выплата 1">
+        <img src="images/pay2.png" alt="Выплата 2">
+        <img src="images/pay3.png" alt="Выплата 3">
+        <img src="images/pay4.png" alt="Выплата 4">
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <p class="footer-text">&copy; 2025 S-SYSTEMS. Все права защищены. | Email: s.systems.official@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.card, .step, .section-title, .screenshots img, .hero-video').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
